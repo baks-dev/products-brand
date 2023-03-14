@@ -1,0 +1,8 @@
+{
+  "namespaces": [
+    {
+      "namespace": "ProductBrand",
+      "path": "Resources/view"
+    }
+  ]
+}
