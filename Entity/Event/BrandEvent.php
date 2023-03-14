@@ -31,6 +31,7 @@ use BaksDev\Core\Type\Modify\ModifyActionEnum;
 use BaksDev\Products\Brand\Entity\Brand;
 use BaksDev\Products\Brand\Entity\Cover\BrandCover;
 use BaksDev\Products\Brand\Entity\Modify\BrandModify;
+use BaksDev\Products\Brand\Entity\Seo\BrandSeo;
 use BaksDev\Products\Brand\Entity\Trans\BrandTrans;
 use BaksDev\Products\Brand\Type\Event\BrandEventUid;
 use BaksDev\Products\Brand\Type\Id\BrandUid;
@@ -70,6 +71,10 @@ class BrandEvent extends EntityEvent
 	/** Перевод */
 	#[ORM\OneToMany(mappedBy: 'event', targetEntity: BrandTrans::class, cascade: ['all'])]
 	private Collection $translate;
+	
+	/** SEO */
+	#[ORM\OneToMany(mappedBy: 'event', targetEntity: BrandSeo::class, cascade: ['all'])]
+	private Collection $seo;
 	
 	public function __construct()
 	{

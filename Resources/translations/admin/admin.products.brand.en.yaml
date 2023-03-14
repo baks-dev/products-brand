@@ -1,0 +1,31 @@
+admin:
+  page:
+    index: 'Product Brands'
+    new: 'Add brand'
+    edit: 'Edit brand'
+    delete: 'Delete brand'
+
+  breadcrumb:
+    index: 'Brand Directory'
+    new: 'Add brand'
+    edit: 'Edit brand'
+    delete: 'Delete brand'
+
+
+  form:
+    label:
+      trans:
+        name: 'Brand Name'
+      url: 'Brand character code'
+
+  success:
+    new: 'Brand added successfully'
+    update: 'Brand updated successfully'
+    delete: 'Brand has been successfully removed to cart'
+    restore: 'Brand successfully restored'
+
+  danger:
+    new: '%s: Error adding brand'
+    update: '%s: Brand update failed'
+    delete: '%s: Error deleting brand'
+    restore: '%s: Failed to restore brand'

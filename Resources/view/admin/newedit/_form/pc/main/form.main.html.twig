@@ -1,0 +1,70 @@
+<div class="d-flex gap-2">
+	
+	<div class="d-flex flex-column gap-2 w-50">
+		{# Настройки локали #}
+		
+		
+		
+		
+		<div class="card w-100 border-light">
+			
+			<div class="card-header border-light bg-body">
+				<div class="card-title">
+					<h4>
+						{# Статус активности #}
+						Основные настройки бренда
+					</h4>
+				</div>
+			</div>
+			<div class="card-body pb-0">
+				{# Торговый каталог #}
+				{{ include(_self|replace({ "form.main.html.twig": "_cover.html.twig" })) }}
+				
+				{# Активность #}
+				{{ include(_self|replace({ "form.main.html.twig": "_active.html.twig" })) }}
+			
+			
+			</div>
+		</div>
+	
+	</div>
+	
+	<div class="d-flex flex-column gap-2 w-50 ">
+		
+
+		<div class="card w-100 border-light">
+			
+			<div class="card-header border-light bg-body">
+				<div class="card-title">
+					<h4>
+						Настройки локали
+					</h4>
+				</div>
+			</div>
+			
+			<div class="card-body pb-0">
+				{# НАСТРОЙКИ ЛОКАЛИ #}
+				{{ include(_self|replace({ "form.main.html.twig": "_trans.html.twig" })) }}
+			</div>
+		</div>
+		
+		<div class="card w-100 border-light">
+			
+			<div class="card-header border-light bg-body">
+				<div class="card-title">
+					<h4>
+						Настройки SEO
+					</h4>
+				</div>
+			</div>
+			
+			<div class="card-body pb-0">
+				{# SEO #}
+				{{ include(_self|replace({ "form.main.html.twig": "_seo.html.twig" })) }}
+			</div>
+		</div>
+	
+	
+	</div>
+
+</div>

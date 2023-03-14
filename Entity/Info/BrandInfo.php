@@ -23,59 +23,63 @@
 
 declare(strict_types=1);
 
-namespace BaksDev\Products\Brand\Entity\Trans;
+namespace BaksDev\Products\Brand\Entity\Info;
 
-use BaksDev\Products\Brand\Entity\Event\BrandEvent;
+use BaksDev\Core\Entity\EntityState;
+use BaksDev\Products\Brand\Entity\Brand;
+use BaksDev\Products\Brand\Entity\Info\Category\BrandCategory;
+use BaksDev\Products\Brand\Type\Id\BrandUid;
+use BaksDev\Products\Category\Type\Id\ProductCategoryUid;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
-use BaksDev\Core\Entity\EntityEvent;
-use BaksDev\Core\Entity\EntityState;
-use BaksDev\Core\Type\Locale\Locale;
 use InvalidArgumentException;
 
-/* Перевод BrandTrans */
+
+/* BrandInfo */
 
 
 #[ORM\Entity]
-#[ORM\Table(name: 'brand_trans')]
-#[ORM\Index(columns: ['name'])]
-class BrandTrans extends EntityEvent
+#[ORM\Table(name: 'brand_info')]
+#[ORM\Index(columns: ['category'])]
+class BrandInfo extends EntityState
 {
-	public const TABLE = 'brand_trans';
+	public const TABLE = 'brand_info';
 	
-	/** Связь на событие */
+	/** ID */
 	#[ORM\Id]
-	#[ORM\ManyToOne(targetEntity: BrandEvent::class, inversedBy: "translate")]
-	#[ORM\JoinColumn(name: 'event', referencedColumnName: "id")]
-	private readonly BrandEvent $event;
+	#[ORM\Column(type: BrandUid::TYPE)]
+	private BrandUid $brand;
 	
-	/** Локаль */
-	#[ORM\Id]
-	#[ORM\Column(type: Locale::TYPE, length: 2)]
-	private readonly Locale $local;
+	/** Семантическая ссылка на бренд */
+	#[ORM\Column(type: Types::STRING, unique: true)]
+	private string $url;
 	
-	/** Название */
-	#[ORM\Column(type: Types::STRING, length: 100)]
-	private string $name;
+	/** Категория */
+	#[ORM\Column(type: ProductCategoryUid::TYPE)]
+	private ProductCategoryUid $category;
 	
-	/** Анонс */
-	#[ORM\Column(type: Types::TEXT, nullable: true)]
-	private ?string $preview;
-	
-	/** Описание */
-	#[ORM\Column(type: Types::TEXT, nullable: true)]
-	private ?string $description;
+	/** Флаг активности */
+	#[ORM\Column(type: Types::BOOLEAN)]
+	private bool $active = true;
 	
 	
-	public function __construct(BrandEvent $event)
+	public function __construct(Brand|BrandUid $brand)
 	{
-		$this->event = $event;
+		$this->brand = $brand instanceof Brand ? $brand->getId() : $brand;
 	}
+	
+	
+	public function getBrand() : BrandUid
+	{
+		return $this->brand;
+	}
+	
 	
 	
 	public function getDto($dto) : mixed
 	{
-		if($dto instanceof BrandTransInterface)
+		if($dto instanceof BrandInfoInterface)
 		{
 			return parent::getDto($dto);
 		}
@@ -86,24 +90,12 @@ class BrandTrans extends EntityEvent
 	
 	public function setEntity($dto) : mixed
 	{
-		
-		if($dto instanceof BrandTransInterface)
+		if($dto instanceof BrandInfoInterface)
 		{
 			return parent::setEntity($dto);
 		}
 		
 		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-	}
-	
-	
-	public function name(Locale $locale) : ?string
-	{
-		if($this->local->getValue() === $locale->getValue())
-		{
-			return $this->name;
-		}
-		
-		return null;
 	}
 	
 }
