@@ -29,7 +29,9 @@ use BaksDev\Core\Type\Locale\Locale;
 use BaksDev\Core\Type\Modify\ModifyAction;
 use BaksDev\Core\Type\Modify\ModifyActionEnum;
 use BaksDev\Products\Brand\Entity\Brand;
+use BaksDev\Products\Brand\Entity\Cover\BrandCover;
 use BaksDev\Products\Brand\Entity\Modify\BrandModify;
+use BaksDev\Products\Brand\Entity\Trans\BrandTrans;
 use BaksDev\Products\Brand\Type\Event\BrandEventUid;
 use BaksDev\Products\Brand\Type\Id\BrandUid;
 use Doctrine\Common\Collections\Collection;
@@ -58,16 +60,16 @@ class BrandEvent extends EntityEvent
 	private ?BrandUid $main = null;
 	
 	/** One To One */
-	//#[ORM\OneToOne(mappedBy: 'event', targetEntity: BrandLogo::class, cascade: ['all'])]
-	//private ?BrandOne $one = null;
+	#[ORM\OneToOne(mappedBy: 'event', targetEntity: BrandCover::class, cascade: ['all'])]
+	private ?BrandCover $cover = null;
 	
 	/** Модификатор */
 	#[ORM\OneToOne(mappedBy: 'event', targetEntity: BrandModify::class, cascade: ['all'])]
 	private BrandModify $modify;
 	
 	/** Перевод */
-	//#[ORM\OneToMany(mappedBy: 'event', targetEntity: BrandTrans::class, cascade: ['all'])]
-	//private Collection $translate;
+	#[ORM\OneToMany(mappedBy: 'event', targetEntity: BrandTrans::class, cascade: ['all'])]
+	private Collection $translate;
 	
 	public function __construct()
 	{
