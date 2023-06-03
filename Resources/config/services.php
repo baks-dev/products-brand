@@ -39,15 +39,16 @@ return static function(ContainerConfigurator $configurator) {
 	
 	$services->load($namespace.'\Controller\\', __DIR__.'/../../Controller')
 		->tag('controller.service_arguments')
+        ->exclude(__DIR__.'/../../Controller/**/*Test.php')
 	;
 	
 	$services->load($namespace.'\Repository\\', __DIR__.'/../../Repository')
 		//->exclude(__DIR__.'/../../Repository/**/*DTO.php')
 	;
-	//->tag('controller.service_arguments');
+
 	
 	$services->load($namespace.'\UseCase\\', __DIR__.'/../../UseCase')
-		->exclude(__DIR__.'/../../UseCase/**/*DTO.php')
+        ->exclude(__DIR__.'/../../UseCase/**/{*DTO.php,*Test.php}')
 	;
 	
 //	$services->load($namespace.'\DataFixtures\\', __DIR__.'/../../DataFixtures')

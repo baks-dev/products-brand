@@ -26,6 +26,7 @@ declare(strict_types=1);
 namespace BaksDev\Products\Brand\Type\Event;
 
 use BaksDev\Core\Type\UidType\UidType;
+use Doctrine\DBAL\Types\Types;
 
 final class BrandEventType extends UidType
 {
@@ -37,7 +38,7 @@ final class BrandEventType extends UidType
 	
 	public function getName() : string
 	{
-		return BrandEventUid::TYPE;
+        return BrandEventUid::TYPE;
 	}
 	
 }

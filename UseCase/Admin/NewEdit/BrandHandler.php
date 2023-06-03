@@ -171,7 +171,6 @@ final class BrandHandler
 		}
 		
 		
-		
 		/* Обновляем событие */
 		$Event->setEntity($command);
 		$this->entityManager->persist($Event);

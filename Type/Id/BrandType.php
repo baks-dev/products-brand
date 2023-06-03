@@ -26,6 +26,7 @@ declare(strict_types=1);
 namespace BaksDev\Products\Brand\Type\Id;
 
 use BaksDev\Core\Type\UidType\UidType;
+use Doctrine\DBAL\Types\Types;
 
 final class BrandType extends UidType
 {
@@ -37,7 +38,7 @@ final class BrandType extends UidType
 	
 	public function getName() : string
 	{
-		return BrandUid::TYPE;
+        return BrandUid::TYPE;
 	}
 	
 }

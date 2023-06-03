@@ -26,7 +26,7 @@ declare(strict_types=1);
 namespace BaksDev\Products\Brand\Controller\Admin;
 
 use BaksDev\Core\Controller\AbstractController;
-use BaksDev\Core\Services\Security\RoleSecurity;
+use BaksDev\Core\Listeners\Event\Security\RoleSecurity;
 use BaksDev\Products\Brand\Entity\Brand;
 use BaksDev\Products\Brand\UseCase\Admin\NewEdit\BrandDTO;
 use BaksDev\Products\Brand\UseCase\Admin\NewEdit\BrandForm;
